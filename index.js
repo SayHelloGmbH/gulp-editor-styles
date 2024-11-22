@@ -23,6 +23,10 @@ module.exports = options => {
 			from: file.path,
 			to: file.path
 		}).then(result => {
+
+			// replace .editor-styles-wrapper body with .editor-styles-wrapper in result.css
+			result.css = result.css.replace(/\.editor-styles-wrapper body/g, '.editor-styles-wrapper');
+			
 			file.contents = Buffer.from(result.css);
 
 			if (result.map && file.sourceMap) {
